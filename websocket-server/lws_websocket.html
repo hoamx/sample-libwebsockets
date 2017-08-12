@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			window.WebSocket = window.WebSocket || window.MozWebSocket;
+			// var websocket = new WebSocket('ws://127.0.0.1:9000', 'dumb-increment-protocol');
+			var websocket = new WebSocket('ws://localhost:9000', 'chat');
+			websocket.onopen = function () {
+				$('h1').css('color', 'green');
+			};
+			websocket.onerror = function () {
+				$('h1').css('color', 'red');
+			};
+			websocket.onmessage = function (message) {
+				console.log(message.data);
+				$('div').append($('<p>', { text: "Server: " + message.data }));
+			};
+
+			$('button').click(function (e) {
+				$('div').append($('<p>', { text: "Client: " +  $('input').val() }));
+				e.preventDefault();
+				websocket.send($('input').val());
+				$('input').val('');
+			});
+
+		});
+	</script>
+</head>
+<body>
+	<h1>Websocket test</h1>
+	<form>
+		<input type="text" name="send">
+		<button>Send</button>
+	</form>
+	<div></div>
+</body>
+</html>
