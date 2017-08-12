@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <libwebsockets.h> 
 
 struct reason_string {
 	enum lws_callback_reasons reason;

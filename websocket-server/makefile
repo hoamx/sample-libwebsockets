@@ -1,9 +1,9 @@
 .PHONY:clean
 	
-all:webserver
+all:lws_webserver
 
-webserver:webserver.c
-	gcc webserver.c -o webserver -lwebsockets
+lws_webserver:lws_webserver.c
+	gcc lws_webserver.c -o lws_webserver -lwebsockets
 
 clean:
-	-rm webserver
+	-rm lws_webserver
